@@ -1,4 +1,4 @@
-# data_structures.py
+# lib/data_structures.py
 
 spicy_foods = [
     {
@@ -18,53 +18,38 @@ spicy_foods = [
     },
 ]
 
-# 1. Function to get names of spicy foods
-def get_names(foods):
-    return [food["name"] for food in foods]
+# Function to return the names of each spicy food
+def get_names(spicy_foods):
+    return [food["name"] for food in spicy_foods]
 
-# 2. Function to get spiciest foods
-def get_spiciest_foods(foods):
-    return [food for food in foods if food["heat_level"] > 5]
+# Function to return foods with heat level greater than 5
+def get_spiciest_foods(spicy_foods):
+    return [food for food in spicy_foods if food["heat_level"] > 5]
 
-# 3. Function to print spicy foods
-def print_spicy_foods(foods):
-    for food in foods:
-        print(f"{food['name']} ({food['cuisine']}) | Heat Level: {'🌶' * food['heat_level']}")
+# Function to print each spicy food in the specified format
+def print_spicy_foods(spicy_foods):
+    for food in spicy_foods:
+        heat_emojis = "🌶" * food["heat_level"]
+        print(f"{food['name']} ({food['cuisine']}) | Heat Level: {heat_emojis}")
 
-# 4. Function to get spicy food by cuisine
-def get_spicy_food_by_cuisine(foods, cuisine):
-    for food in foods:
+# Function to find a spicy food by cuisine type
+def get_spicy_food_by_cuisine(spicy_foods, cuisine):
+    for food in spicy_foods:
         if food["cuisine"] == cuisine:
             return food
     return None
 
-# 5. Function to print spiciest foods
-def print_spiciest_foods(foods):
-    spiciest_foods = get_spiciest_foods(foods)
+# Function to print only the spiciest foods
+def print_spiciest_foods(spicy_foods):
+    spiciest_foods = get_spiciest_foods(spicy_foods)
     print_spicy_foods(spiciest_foods)
 
-# 6. Function to calculate average heat level
-def average_heat_level(foods):
-    total_heat = sum(food["heat_level"] for food in foods)
-    return total_heat // len(foods)  # Integer division
+# Function to calculate the average heat level of all spicy foods
+def get_average_heat_level(spicy_foods):
+    total_heat = sum(food["heat_level"] for food in spicy_foods)
+    return total_heat // len(spicy_foods) if spicy_foods else 0
 
-# 7. Function to create a new spicy food
-def create_spicy_food(foods, new_food):
-    foods.append(new_food)
-    return foods
-
-# Example usage (uncomment to test)
-if __name__ == "__main__":
-    print(get_names(spicy_foods))  # ["Green Curry", "Buffalo Wings", "Mapo Tofu"]
-    print(get_spiciest_foods(spicy_foods))  # [{"name": "Green Curry", "cuisine": "Thai", "heat_level": 9}, {"name": "Mapo Tofu", "cuisine": "Sichuan", "heat_level": 6}]
-    print_spicy_foods(spicy_foods)  # Prints all spicy foods
-    print(get_spicy_food_by_cuisine(spicy_foods, "American"))  # {"name": "Buffalo Wings", "cuisine": "American", "heat_level": 3}
-    print_spicy_foods(spicy_foods)  # Prints foods with heat level > 5
-    print(average_heat_level(spicy_foods))  # 6
-    new_food = {
-        'name': 'Griot',
-        'cuisine': 'Haitian',
-        'heat_level': 10,
-    }
-    create_spicy_food(spicy_foods, new_food)
-    print(spicy_foods)  # New food added
+# Function to add a new spicy food to the list
+def create_spicy_food(spicy_foods, new_food):
+    spicy_foods.append(new_food)
+    return spicy_foods
